@@ -1,0 +1,345 @@
+<div class="row article-entete">
+    <div class="col-sm-9">
+        <p class="titre-page" ng-if="categorieFilter != undefined"><!--<i class="fa fa-{{categorieFilterIcon}} fa-lg"></i>--> {{categorieFilter}} </p>
+        <p class="titre-page" ng-if="categorieFilter == undefined"><!--<i class="fa fa-{{categorieFilterIcon}} fa-lg"></i>--> All </p>
+    </div>
+    <div class="col-sm-3">
+        <div class="pull-right">
+            <a href="#!/new/donnee" class="btn btn-default"><i class="fa fa-edit fa-fw"></i> Rentrer une nouvelle donnée</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_listes">
+            <div class="panel-heading">
+                <i class="fa fa-database fa-fw marge-adjust"></i> Liste des catagories
+            </div>
+            <div class="panel-body panel-arbre">
+                <div class="row row-center">
+                    <div class="col-sm-12">
+                        <a class="btn btn-default" href="#!/listes/All"><i class="fa fa-archive fa-fw"></i> All </a>
+                        <a style="margin-right: 5px;" ng-repeat="categorie in categories" class="btn btn-default" href="#!/listes/{{categorie.title}}"><i class="fa fa-{{categorie.faIcone}} fa-fw"></i> {{categorie.title}} </a>
+                    </div>
+                    <br>
+                    <div class="col-sm-12" style="margin-top:12px;">
+                		<div class="form-group">
+							<select class="form-control" ng-init="order = '-realeaseDate'" ng-model="order">
+								<option value="-realeaseDate" disabled hidden>Choisir un ordre de tri </option>
+								<option value="title">Trié par Titre (A à Z)</option>
+								<option value="-title">Trié par Titre (Z à A)</option>
+								<option value="realeaseDate">Trié par date (plus vieux aux plus récents)</option>
+								<option value="-realeaseDate">Trié par date (plus récents aux plus vieux)</option>
+								<option value="id">Trié par date d'ajout (plus vieux aux plus récents)</option>
+								<option value="-id">Trié par date d'ajout (plus récents aux plus vieux)</option>
+							</select>
+						</div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="input-group">
+	                    	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+	                    	<input ng-model="query.title" type="text" class="form-control" placeholder="Recherche par titre">                    		
+                    	</div>
+                    </div>
+                    <!--<div class="col-sm-12">
+                    	<div class="input-group">
+	                    	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+	                    	<input ng-model="categorieFilter.idCategorymultimedia.title" type="text" class="form-control" placeholder="Recherche par titre">                    		
+                    	</div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- affiche ui card -->
+<div class="row">
+    <div class="col-md-2" ng-repeat="post in posts | filter:query | filter:categorieFilter | orderBy:order">
+        <div class="ui-card" style="height: 394px;">
+            <div class="ui-enrobe-image-donnee">
+                <a href="#" ng-click="selectModal(post)" data-toggle="modal" data-target="#myModal" class="ui-href">
+                    <img class="ui-image" ng-src="{{post.pathposter}}">
+                </a>
+            </div>
+            <div class="ui-categorie-donnee">
+                <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+            </div>
+            <div class="ui-text">
+                <div class="ui-titre" style="margin-top: 0px;">
+                    <a href="#" data-toggle="modal" ng-click="selectModal(post)" data-target="#myModal">{{post.title}}</a>
+                </div>
+                <!--<div class="ui-description">
+                    <span>Matrix est le premier volet de la trilogie Matrix qui se poursuivra avec les films Matrix Reloaded et Matrix Revolutions</span>
+                </div>-->
+                <div class="ui-info">
+                    <span>catégorie : {{post.idCategorymultimedia.title}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+		<div class="panel panel-default lobipanel_affiche panel-bootstrap-modif">
+
+	        <div class="modal-header panel-heading">
+	          <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+	          <h4 class="modal-title panel-title">{{modalPost.idCategorymultimedia.title}} - {{modalPost.title}}</h4>
+	        </div>
+	        <div class="modal-body panel-body" style="padding: 0;">
+	          
+	          <!-- affiche film -->
+
+	          <div class="movie-card">
+  
+				  <div class="container-liste">
+				    
+				    <a ng-href="{{modalPost.trailerurl}}" target="_blank">
+				    	<img ng-src="{{modalPost.pathposter}}" class="cover" alt="cover"/>
+				    	<img src="images/playicone.png" class="cover-lecter" />
+			    	</a>
+				        
+				    <div class="hero">
+		            	<img class="hero_fond" ng-src="{{modalPost.pathcoverimage}}">
+				      <div class="details">
+				      
+				        <div class="title1">{{modalPost.title}} <!--<span>PG-13</span>--></div>
+
+				        <div class="title2">{{modalPost.subtitle}}</div>    
+				        
+				        <fieldset class="rating">
+						    <input ng-if="modalScore == 10" type="radio" id="star5" name="rating" value="5" disabled ng-checked=true />
+							<input ng-if="modalScore != 10" type="radio" id="star5" name="rating" value="5" disabled/>
+							<label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+						    <input ng-if="modalScore == 9" type="radio" id="star4half" name="rating" value="4 and a half" disabled ng-checked=true />
+							<input ng-if="modalScore != 9" type="radio" id="star4half" name="rating" value="4 and a half" disabled/>
+							<label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+
+						    <input ng-if="modalScore == 8" type="radio" id="star4" name="rating" value="4" disabled ng-checked=true />
+							<input ng-if="modalScore != 8" type="radio" id="star4" name="rating" value="4" disabled/>
+							<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+
+						    <input ng-if="modalScore == 7" type="radio" id="star3half" name="rating" value="3 and a half" disabled ng-checked=true />
+							<input ng-if="modalScore != 7" type="radio" id="star3half" name="rating" value="3 and a half" disabled/>
+							<label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+
+						    <input ng-if="modalScore == 6" type="radio" id="star3" name="rating" value="3" disabled ng-checked=true />
+							<input ng-if="modalScore != 6" type="radio" id="star3" name="rating" value="3" disabled/>
+							<label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+						    <input ng-if="modalScore == 5" type="radio" id="star2half" name="rating" value="2 and a half" disabled ng-checked=true />
+							<input ng-if="modalScore != 5" type="radio" id="star2half" name="rating" value="2 and a half" disabled/>
+							<label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+
+						    <input ng-if="modalScore == 4" type="radio" id="star2" name="rating" value="2" disabled ng-checked=true />
+							<input ng-if="modalScore != 4" type="radio" id="star2" name="rating" value="2" disabled/>
+							<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+						    <input ng-if="modalScore == 3" type="radio" id="star1half" name="rating" value="1 and a half" disabled ng-checked=true />
+							<input ng-if="modalScore != 3" type="radio" id="star1half" name="rating" value="1 and a half" disabled/>
+							<label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+
+						    <input ng-if="modalScore == 2" type="radio" id="star1" name="rating" value="1" disabled ng-checked=true />
+							<input ng-if="modalScore != 2" type="radio" id="star1" name="rating" value="1" disabled/>
+							<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+
+						    <input ng-if="modalScore == 1" type="radio" id="starhalf" name="rating" value="half" disabled ng-checked=true />
+							<input ng-if="modalScore != 1" type="radio" id="starhalf" name="rating" value="half" disabled/>
+							<label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+
+					  	</fieldset>
+
+						  <!--<fieldset class="rating">
+							  <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+							  <input type="radio" id="star4half" name="rating" value="4 and a half" checked/><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+							  <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+							  <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+							  <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+							  <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+							  <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+							  <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+							  <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+							  <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+							  <input type="radio" id="star0" name="rating" value="0" /><label class="full" for="star0" title="No Score - 0 stars"></label>
+						  </fieldset>-->
+
+					  	<span ng-if="modalNbrPers != 1" style="margin-left: 24px; color: white; font-size: 17px; float: left;" class="likes">{{modalNbrPers}} Personnes ont noté</span>
+					  	<span ng-if="modalNbrPers == 1" style="margin-left: 24px; color: white; font-size: 17px; float: left;" class="likes">{{modalNbrPers}} Personnes à noté</span>
+
+					  	<fieldset style="margin-left: 24px; width: 170px;" class="rating">
+							<i class="fa fa-calendar fa-lg" style="float: left; margin-top: 4px;"></i>
+					  		<p style="font-size: 18px; padding-left: 26px; color: white;">{{modalPost.realeaseDate | date : "d MMMM yyyy"}}</p>
+					  	</fieldset>
+				        
+
+				        
+				      </div> <!-- end details -->
+				      
+				    </div> <!-- end hero -->
+				    
+				    <div class="description">
+				      
+				      <div class="column1">
+				        <span class="tag">{{modalPost.idCategorymultimedia.title}}</span>
+					  	<span  ng-if="modalScore == 0" class="tag">Aucun Score</span>
+					  	<span  ng-if="modalScore > 0" class="tag">note : {{modalScore}}/10</span>
+				        <span class="tag">{{modalPost.realeaseDate | date : "d MMMM yyyy"}}</span>
+				        <!--<span class="tag">adventure</span>-->
+				      </div> <!-- end column1 -->
+				      
+				      <div class="column2">
+				        
+				        <div ng-bind-html="modalDescription"> <!--<a href="#">read more</a>--></div>
+				        
+				        <div class="avatars">
+				          <a href="#" class="btn btn-default" ng-click="modalEdit(modalPost)" data-placement="top">
+				        	<i class="fa fa-edit fa-fw"></i> Éditer la donnée
+				          </a>
+				          
+				          <a href="#" ng-click="modalDelete(modalPost)" data-toggle="modal" data-target="#delete" class="btn btn-default" data-placement="top">
+				            <i class="fa fa-trash fa-fw"></i> Supprimer la donnée
+				          </a>
+				          
+				          <a href="#" ng-click="modalList(modalPost)" data-toggle="modal" data-target="#personnel-list-add" class="btn btn-default" data-placement="top">
+				            <i class="fa fa-plus fa-fw"></i> Mettre à jour ma liste
+				          </a>
+				          <button class="btn btn-default pull-right" ng-click="pushAlert(modalPost)" style="border-radius:50px;margin-right: 5px;"><i class="fa fa-bell fa-fw"></i></button>
+				        </div> <!-- end avatars -->
+				        
+				        
+				        
+				      </div> <!-- end column2 -->
+				    </div> <!-- end description -->
+				    
+				   
+				  </div> <!-- end container -->
+				</div> <!-- end movie-card -->
+
+	          <!-- fin affiche film -->
+
+	        </div>
+	        <div class="panel-footer" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);">
+	          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+	        </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal add personnel-->
+  <div class="modal fade" id="personnel-list-add" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Mettre à jour ma liste personnel</h4>
+        </div>
+        <div class="modal-body">
+
+          <form ng-show="listPerso.id" ng-submit="editListPerso(listPerso)">
+		    <div class="input-group col-sm-12">
+		        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+		        <input required type="text" class="form-control" ng-model="listPerso.current" required="required" placeholder="Etat de visionnage ou commentaire (ex : S3 Ep 24, Tome 3, Scan Chap.457)" />
+		    </div>
+		    <div class="input-group col-sm-12">
+		        <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+		        <input required type="text" class="form-control" ng-model="listPerso.note" required="required" placeholder="note sur 10 (ex de chiffre à mettre : 2)" />
+		    </div>
+		    <div class="input-group col-sm-12">
+		    	<span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-alphabet"></i></span>
+		        <select required class="form-control" ng-init="listPerso.seen" ng-model="listPerso.seen">
+	                <option value="0">Completed (Terminé)</option>
+	                <option value="1">Watching (En cours de visionnage)</option>
+	                <option value="2">Plan to watch (A voir plus tard)</option>
+	                <option value="3">Dropped (laissé tomber)</option>
+              	</select>
+		    </div>
+		    <br>
+		    <input type="button" ng-click="editList()" class="btn btn-default" href="#" value="Mettre à jour ma liste" />
+		    <button type="button" ng-click="deleteList()" class="btn btn-default pull-right" data-toggle="modal" data-target="#delete-list">supprimer de ma liste</button>
+          </form>
+
+          <form ng-hide="listPerso.id" ng-submit="newListPerso()">
+		    <div class="input-group col-sm-12">
+		        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+		        <input required type="text" class="form-control" ng-model="newListPerso.current" required="required" placeholder="Etat de visionnage ou commentaire (ex : S3 Ep 24, Tome 3, Scan Chap.457)" />
+		    </div>
+		    <div class="input-group col-sm-12">
+		        <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+		        <input required type="text" class="form-control" ng-model="newListPerso.note" required="required" placeholder="note sur 10 (ex de chiffre à mettre : 2)" />
+		    </div>
+		    <div class="input-group col-sm-12">
+		    	<span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-alphabet"></i></span>
+		        <select required class="form-control" ng-init="newListPerso.seen = 'null'" ng-model="newListPerso.seen">
+		        	<option value="null" disabled>Choisir un etat de visionnage</option>
+	                <option value="0">Completed (Terminé)</option>
+	                <option value="1">Watching (En cours de visionnage)</option>
+	                <option value="2">Plan to watch (A voir plus tard)</option>
+	                <option value="3">Dropped (laissé tomber)</option>
+              	</select>
+		    </div>
+		    <br>
+		    <input type="button" class="btn btn-default" href="#" ng-click="ajoutList()" value="Ajouter à ma liste" />
+          </form>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete-->
+  <div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Supprimer la donnée</h4>
+        </div>
+        <div class="modal-body row-center">
+          <button type="button" class="btn btn-default" ng-click="deletePost()" data-dismiss="modal"><i class="fa fa-check fa-fw"></i> Oui, supprimer l'élément</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> non, ne pas supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal delete liste-->
+  <div class="modal fade" id="delete-list" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Supprimer de la liste</h4>
+        </div>
+        <div class="modal-body row-center">
+          <button type="button" class="btn btn-default" ng-click="deletePostlist()" data-dismiss="modal"><i class="fa fa-check fa-fw"></i> Oui, supprimer l'élément</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> non, ne pas supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+$(function(){
+    $('.lobipanel_listes').lobiPanel({
+        reload: false,
+        editTitle: false,
+        state: "collapsed"
+    });
+    $('.lobipanel_affiche').lobiPanel({
+        reload: false,
+        editTitle: false
+    });
+});
+</script>

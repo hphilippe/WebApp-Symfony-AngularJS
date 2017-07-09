@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+	<META NAME="ROBOTS" content="noindex">
+	<meta charset="UTF-8">
+
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- lightLogin -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet prefetch' href='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/css/demo.css'>
+    <!-- stylesheet login -->
+    <link rel="stylesheet" type="text/css" href="css/login/styleLogin.css">
+    <link rel="stylesheet" type="text/css" href="css/login/surchargeBootstrap.css">
+    
+	<link rel="icon" type="image/x-icon" href="images/logo skearV233.png"/>
+</head>
+<body ng-app="myApp" ng-controller="mainCtrl">
+
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas"></canvas>
+        <!--<h1 class="main-title">Connect <span class="thin">Three</span></h1>-->
+        <div class="main-title">
+            <div class="container">
+
+                <div class="row">
+                    <div class="row-height">
+                        <div class="col-xs-4 col-height">
+                            <img class="resize_image" src="images/logo_skearV22_v2.png" alt="Example" />
+                            <div>
+                            	<div class="glitch titre_accueil" data-text="SKEAR"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-8 col-height col-middle">
+
+							<form>
+							    <div class="input-group col-sm-offset-3 col-sm-6 col-sm-offset-3">
+							        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							        <input ng-model="data.username" type="text" class="form-control" required="required" placeholder="Pseudo" />
+							    </div>
+
+							    <div class="input-group col-sm-offset-3 col-sm-6 col-sm-offset-3">
+							        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							        <input ng-model="data.password" type="password" class="form-control" required="required" placeholder="Mot de passe"/>
+							    </div>
+
+							    <!--<div class="form-group">
+							        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+							        <label for="remember_me" class="font_charge">{{ 'security.login.remember_me'|trans }}</label>
+							    </div>-->
+
+							    <br>
+
+							    <input type="submit" class="btn btn-primary" href="#" ng-click="login()" value="Connexion" />
+							</form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>		
+
+	<!-- cdn jquery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<!-- login light background (ordre des scripts important) -->
+	<script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/EasePack.min.js'></script>
+    <script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/rAF.js'></script>
+    <script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/TweenLite.min.js'></script>
+	<script src="js/login/moveImg.js"></script>
+	<script src="js/login/animatedLumiere.js"></script>
+
+	<!-- cdn angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-route.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-resource.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-cookies.min.js"></script>
+
+	<!-- Restangular -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.1/restangular.min.js"></script>
+
+	<!-- scrîpt site web -->
+	<script src="js/login/login.js"></script>
+
+
+</body>
+</html>

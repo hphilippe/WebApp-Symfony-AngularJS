@@ -1,0 +1,3 @@
+skear_user_homepage:
+    path:     /users
+    defaults: { _controller: SkearUserBundle:Default:index }

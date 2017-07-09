@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Catégorie {{  driveCategorie.title }}</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Titre</th>
+            <td>{{ driveCategorie.title }}</td>
+        </tr>
+        <tr>
+            <th>Logo</th>
+            <td><img style="width: 100px;" src="{{ asset(driveCategorie.AssetPath) }}" alt="{{ driveCategorie.title }}" /></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_index') }}">Retour à la liste des catégorie</a>
+        </li>
+        <li>
+            <a href="{{ path('categorie_edit', { 'id': driveCategorie.id }) }}">Éditer la catégorie</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-primary" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,98 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-file-text fa-lg"></i> Nouvelle article </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <form ng-submit="newPost()">
+            <div class="form-group">
+                <label>Choix de la catégorie</label>
+                <select required class="form-control" ng-init="new.Categorypost = 'null'" ng-model="new.Categorypost">
+                    <option value="null" disabled hidden>Choisir une catégorie </option>
+                    <option ng-repeat="categorie in categories" value="{{categorie.id}}">{{categorie.title}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Titre</label>
+                <input type="text" class="form-control" required="required" placeholder="Titre" ng-model="new.title"/>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea data-ck-editor required class="form-control" ng-model="new.body"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Image de fond (1108 x 297)</label>
+                        <input type="text" class="form-control" required="required" placeholder="lien url image du fond" ng-model="new.pathcoverimage"/>
+                    </div>
+                    <div>
+                        <img ng-src="{{new.pathcoverimage}}" width="1108">
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+
+            <button type="submit" class="btn btn-default">Publier</button>
+            <a href="#!/index" class="btn btn-default pull-right">Retour à la page d'accueil</a>
+        </form>
+    </div>
+</div>
+
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-binoculars fa-lg"></i> Preview </p>
+    </div>
+</div>
+
+<div class="row article-entete" style="border-bottom: 0px solid #eee;">
+    <!-- panel alert -->
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-file-text fa-fw marge-adjust"></i> {{new.title}}
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="hero" style="margin: -15px; height: 297px;">
+                    <img class="article_cover_image" ng-src="{{new.pathcoverimage}}">
+                    <div class="article_background">
+                        <h3>{{new.title}}</h3>
+                    </div>
+                </div>
+                <div class="article_grand_user">
+                    <p class="article-affiche-user">
+                        <img style="width: 100px; height:100px;" ng-src="{{user.pathavatarimg}}">
+                    </p>
+                </div>
+                <div class="article_grand_user" style="margin-top: 71px;">
+                    <p class="article-affiche-user">
+                        <strong>{{user.username}}</strong>
+                    </p>
+                </div>
+                <div class="col-sm-12">
+                    <br>
+                    <h4 class="pull-left" style="margin-top: 33px;"><i class="fa fa-database fa-fw"></i><strong>Catégorie d'id:</strong> {{new.Categorypost}}</h4>
+                    <h4 class="pull-right" style="margin-top: 33px;"><strong>Publication:</strong> {{date | date : "d MMMM"}}</h4>
+
+                    <div style="margin-top: 86px;" ng-bind-html="new.body | to_trusted"></div>
+
+                </div>
+            </div>
+            <!-- /.panel-body -->
+             <div class="panel-footer">
+                <!--<form>
+                    <div class="form-group">
+                        <label>Commentaire</label>
+                        <textarea data-ck-editor required class="form-control" ng-model="new.content"></textarea>
+                    </div>
+                    <button class="btn btn-default">Publier</button>
+                </form>-->
+             </div>
+        </div>
+    </div>
+</div>

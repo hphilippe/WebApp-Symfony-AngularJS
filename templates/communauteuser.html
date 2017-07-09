@@ -1,0 +1,371 @@
+<div class="row article-entete">
+    <div class="col-sm-7">
+        <p class="titre-page" ng-if="categorieFilter != undefined">{{currentName}} - {{categorieFilter}} </p>
+        <p class="titre-page" ng-if="categorieFilter == undefined">{{currentName}} - All </p>
+    </div>
+    <div class="col-sm-5">
+        <div class="pull-right">
+            <a class="btn btn-default" href="#!/listes/all"><i class="fa fa-database fa-fw"></i> voir toutes les listes </a>
+            <!--<button class="btn btn-default"><i class="fa fa-star fa-fw"></i> voir les achievements </button>-->
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_personelle">
+            <div class="panel-heading">
+                <i class="fa fa-database fa-fw marge-adjust"></i> Liste des catagories
+            </div>
+            <div class="panel-body panel-arbre">
+                <div class="row row-center">
+                    <div class="col-sm-12">
+                        <a class="btn btn-default" href="#!/communaute/{{currentName}}/All"><i class="fa fa-archive fa-fw"></i> All </a>
+                        <a style="margin-right: 5px;" ng-repeat="categorie in categories" class="btn btn-default" href="#!/communaute/{{currentName}}/{{categorie.title}}"><i class="fa fa-{{categorie.faIcone}} fa-fw"></i> {{categorie.title}} </a>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control" ng-init="order = 'All'" ng-model="order">
+                            <option value="All" disabled hidden>Choisir un ordre de tri </option>
+                            <option value="All">All(Tout)</option>
+                            <option value="0">Completed (Terminé)</option>
+                            <option value="1">Watching (En cours de visionnage)</option>
+                            <option value="2">Plan to watch (A voir plus tard)</option>
+                            <option value="3">Dropped (laissé tomber)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input ng-model="query.title" type="text" class="form-control" placeholder="Recherche par titre">                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="order == 'All'">
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Watching (En cours de visionnage)</h3>
+            <hr style="margin-top: 0px;">
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 1">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                    <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Plan to watch (A voir plus tard)</h3>
+            <hr style="margin-top: 0px;">
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 2">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                    <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Completed (Terminé)</h3>
+            <hr style="margin-top: 0px;">
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 0">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Dropped (laissé tomber)</h3>
+            <hr style="margin-top: 0px;">
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 3">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</div> <!-- order = All -->
+
+<div ng-if="order == '0'">
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Completed (Terminé)</h3>
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 0">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div> <!-- order = Completed -->
+
+<div ng-if="order == '1'">
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Watching (En cours de visionnage)</h3>
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 1">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div> <!-- order = Watching -->
+
+<div ng-if="order == '2'">
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Plan to watch (A voir plus tard)</h3>
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 2">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div> <!-- order = Plan to watch -->
+
+<div ng-if="order == '3'">
+
+    <div class="row row-center">
+        <div class="col-sm-12">
+            <h3 class="titre-marge">Dropped (laissé tomber)</h3>
+        </div>
+    </div>
+
+    <!-- affiche personnelle card personelle -->
+    <div class="row">
+        <div class="col-sm-2" ng-repeat="post in posts | filter:query | filter:categorieFilter" ng-if="post.seen == 3">
+            <div class="personnelle-card">
+                <div class="personnelle-enrobe-image">
+                     <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit" class="personnelle-href">
+                        <img class="personnelle-image" ng-src="{{post.pathposter}}">
+                    </a>
+                </div>
+                <div class="personnelle-categorie">
+                    <i class="fa fa-fw fa-x3 fa-{{post.idCategorymultimedia.faIcone}}"></i>
+                </div>
+                <div class="personnelle-note">
+                    <span>{{post.note}}/10</span>
+                </div>
+                <div class="personnelle-description">
+                    <div class="personnelle-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.title}}</a>
+                    </div>
+                    <div class="personnelle-sous-titre">
+                        <a href="#" ng-click="modalList(post)" data-toggle="modal" data-target="#personnel-list-edit">{{post.subtitle}}</a>
+                    </div>
+                    <div class="personnelle-current">
+                        <span>{{post.current}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div> <!-- order = Dropped -->
+
+<script type="text/javascript">
+$(function(){
+    $('.lobipanel_personelle').lobiPanel({
+        reload: false,
+        editTitle: false,
+        //state: "collapsed"
+    });
+});
+</script>

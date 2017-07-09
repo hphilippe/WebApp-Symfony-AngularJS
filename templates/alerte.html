@@ -1,0 +1,40 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-bell fa-lg"></i> liste des sortie a venir</p>
+    </div>
+</div>
+
+<div class="row">
+ <!-- panel alert -->
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_alerte">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw  marge-adjust"></i> Alertes Sorties
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <li ng-repeat="listitem in listitems | orderBy:'-realeaseDate'" class="list-group-item">
+                        <button class="btn btn-default" ng-click="pushAlert(listitem)" style="border-radius:50px;margin-right: 5px;"><i class="fa fa-bell fa-fw"></i></button>
+                        <i class="fa fa-{{listitem.idCategorymultimedia.faIcone}} fa-fw"></i> <a href="#!/listes/{{listitem.idCategorymultimedia.title}}">{{listitem.title}}</a> - {{listitem.realeaseDate | date : "d MMMM yyyy"}}
+                        <span class="pull-right text-muted small">
+                            <em style="color: black; font-size: 16px;" countdown='' date="{{listitem.realeaseDate}}" ><!--{{listitem.realeaseDate | date : "d MMMM"}}--></em>
+                        </span>
+                    </li>
+                </div>
+                <!-- /.list-group -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+    <!-- fin panel aleert -->
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('.lobipanel_alerte').lobiPanel({
+        reload: false,
+        editTitle: false,
+    });
+});
+</script>

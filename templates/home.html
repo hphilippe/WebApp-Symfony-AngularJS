@@ -1,0 +1,217 @@
+<div class="row article-entete">
+    <div class="col-sm-4">
+        <p class="titre-page"><i class="fa fa-file-text fa-lg"></i> Articles récents</p>
+    </div>
+     <div class="col-sm-8">
+        <div class="pull-right">
+            <select class="form-control form-boostrap" ng-init="orderPost = ''" ng-model="orderPost">
+                <option ng-repeat="categoriePost in categoriePosts" ng-if="categoriePost.title == 'All'" value="">All</option>
+                <option ng-repeat="categoriePost in categoriePosts" ng-if="categoriePost.title != 'All'" value="{{categoriePost.title}}">{{categoriePost.title}}</option>
+            </select>
+            <!--<button class="btn btn-default"><i class="fa fa-plus fa-fw"></i></button>-->
+        </div>
+    </div>
+</div>
+
+<!-- affiche ui card -->
+<div class="row">
+    <div class="col-sm-3" ng-repeat="postsArticle in postsArticles | orderBy:'-id' | filter:orderPost | limitTo:4">
+        <div class="ui-card">
+            <div class="ui-enrobe-image">
+                 <a href="#!/articles/{{postsArticle.categoryTitle}}/{{postsArticle.title}}" class="ui-href">
+                    <img class="ui-image" ng-src="{{postsArticle.pathcoverimage}}">
+                </a>
+            </div>
+            <div class="ui-categorie">
+                <img style="width: 29px;" ng-src="{{postsArticle.categoryUrl}}">
+            </div>
+            <div class="ui-text">
+                <div class="ui-titre">
+                    <a href="#!/articles/{{postsArticle.categoryTitle}}/{{postsArticle.title}}">{{postsArticle.title}}</a>
+                </div>
+                <!--<div class="ui-description">
+                    <span>Matrix est le premier volet de la trilogie Matrix qui se poursuivra avec les films Matrix Reloaded et Matrix Revolutions</span>
+                </div>-->
+                <div class="ui-info">
+                    <span>catégorie : {{postsArticle.categoryTitle}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row article-entete">
+    <div class="col-sm-4">
+        <p class="titre-page"><i class="fa fa-database fa-lg"></i> Dernières sorties</p>
+    </div>
+    <div class="col-sm-8">
+        <div class="pull-right">
+            <select class="form-control form-boostrap" ng-init="orderMedia = ''" ng-model="orderMedia">
+                <option value="">All</option>
+                <option ng-repeat="categorieMedia in categorieMedias" value="{{categorieMedia.title}}">{{categorieMedia.title}}</option>
+            </select>
+            <!--<button class="btn btn-default"><i class="fa fa-plus fa-fw"></i></button>-->
+        </div>
+    </div>
+</div>
+
+<!-- affiche ui card -->
+<div class="row">
+    <div class="col-md-2" ng-repeat="mainitem in mainitems | orderBy:'-id' | filter:orderMedia | limitTo:6">
+        <div class="ui-card" style="height: 394px;">
+            <div class="ui-enrobe-image-donnee">
+                <a href="#!/listes/{{mainitem.idCategorymultimedia.title}}" class="ui-href">
+                    <img class="ui-image" ng-src="{{mainitem.pathposter}}">
+                </a>
+            </div>
+            <div class="ui-categorie-donnee">
+                <i class="fa fa-fw fa-x3 fa-{{mainitem.idCategorymultimedia.faIcone}}"></i>
+            </div>
+            <div class="ui-text">
+                <div class="ui-titre" style="margin-top: 0px;">
+                    <a href="#!/listes/{{mainitem.idCategorymultimedia.title}}" data-target="#myModal">{{mainitem.title}}</a>
+                </div>
+                <!--<div class="ui-description">
+                    <span>Matrix est le premier volet de la trilogie Matrix qui se poursuivra avec les films Matrix Reloaded et Matrix Revolutions</span>
+                </div>-->
+                <div class="ui-info">
+                    <span>catégorie : {{mainitem.idCategorymultimedia.title}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-cubes fa-fw"></i> Administration
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-titre">
+                                <span>Nouvel Article</span>
+                            </div>
+                            <a href="#!/new/article" >
+                            <div class="card-image">
+                                <img src="images/nain.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#!/new/article">Écrire</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                         <div class="card">
+                            <div class="card-titre">
+                                <span>Nouvelle donnee liste</span>
+                            </div>
+                            <a href="#!/new/donnee" >
+                            <div class="card-image">
+                                <img src="images/vomit.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#!/new/donnee">Écrire</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                         <div class="card">
+                            <div class="card-titre">
+                                <span>Profile liste</span>
+                            </div>
+                            <a href="#!/personnelle/All" >
+                            <div class="card-image">
+                                <img src="images/ours.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#!/personnelle/All">Éditer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                         <div class="card">
+                            <div class="card-titre">
+                                <span>Admin categories listes</span>
+                            </div>
+                            <a href="#!/new/categorie-liste" >
+                            <div class="card-image">
+                                <img src="images/photofunky.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#!/new/categorie-liste">Éditer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <!--<div class="col-sm-3">
+                         <div class="card">
+                            <div class="card-titre">
+                                <span>Tester Ufo Catcher</span>
+                            </div>
+                            <a href="#" >
+                            <div class="card-image">
+                                <img src="images/oculus.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#">Jouer</a>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-sm-3">
+                         <div class="card">
+                            <div class="card-titre">
+                                <span>Voir communaute</span>
+                            </div>
+                            <a href="#" >
+                            <div class="card-image">
+                                <img src="images/doge.gif">
+                            </div>
+                            </a>
+                            <div class="card-description">
+                                <a href="#!/communaute">voir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- panel alert -->
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Alertes Sorties
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <a ng-repeat="listitem in listitems | orderBy:'-realeaseDate' | limitTo:10" href="#!/listes/{{listitem.idCategorymultimedia.title}}" class="list-group-item">
+                        <i class="fa fa-{{listitem.idCategorymultimedia.faIcone}} fa-fw"></i> {{listitem.title}}
+                        <span class="pull-right text-muted small">
+                            <em style="color: black;" countdown='' date="{{listitem.realeaseDate}}" ><!--{{listitem.realeaseDate | date : "d MMMM"}}--></em>
+                        </span>
+                    </a>
+                </div>
+                <!-- /.list-group -->
+                <a href="#!/alerte" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+    <!-- fin panel aleert -->
+</div>
+

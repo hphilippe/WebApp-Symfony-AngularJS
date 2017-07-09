@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "hackFont";
+    src: url('../../bundles/skearapplication/font/HACKED.ttf');
+}
+
+.titre_accueil{
+    font-family: "hackFont", Helvetica, Arial, sans-serif;
+    font-size:40px;
+}
+
+.titre_accueil span{
+    font-size:14px;
+}
+
+.nav_decal{
+    margin-left: 60px;
+}
+
+body{
+    background-image: url('../../bundles/skearapplication/images/Black-Background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    background-attachment: fixed;
+}
+
+.nav>li>a:focus{
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+
+#preview{
+    position:absolute;
+    border:3px solid #ccc;
+    background:#333;
+    /*padding:5px;*/
+    display:none;
+    color:#fff;
+    /*box-shadow: 4px 4px 3px rgba(103, 115, 130, 1);*/
+}
+
+div.dataTables_wrapper div.dataTables_length select{
+    color: #000;
+}
+
+div.dataTables_wrapper div.dataTables_filter input{
+    color: #000;
+}
+
+.dataTables_length{
+    float: left;
+}
+
+#myTable{
+    width: 100%;
+}
+
+.paginate_button{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 6px;
+}

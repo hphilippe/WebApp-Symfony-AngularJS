@@ -1,0 +1,29 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Delete {{  driveFile.title }}</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Titre</th>
+            <td>{{ driveFile.title }}</td>
+        </tr>
+        <tr>
+            <th>Logo</th>
+            <td><img style="width: 500px;" src="{{ asset(driveFile.AssetPath) }}" alt="{{ driveFile.title }}" /></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('skear_drive_file') }}">Retour à la homepage</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-primary" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

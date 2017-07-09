@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+
+        {% block stylesheets %}
+            {% stylesheets filter='cssrewrite, ?scssphp'
+            'bundles/skearapplication/css/sb-admin-2.css'
+            'bundles/skearapplication/css/menu_responsive.css'
+            'bundles/skearapplication/css/style.css'
+            'bundles/skearapplication/css/dropzone.css'
+            'bundles/skearapplication/css/fileinput.min.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+            {% endstylesheets %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    </head>
+    <body>
+
+    <!---- autre ---->
+
+
+
+        <!--------------------- Navigation top ----------------------->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0; background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);">
+            <div class="navbar-header">
+               <!-- <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                    <span class="hamb-top"></span>
+                    <span class="hamb-middle"></span>
+                    <span class="hamb-bottom"></span>
+                </button>-->
+                <!--<a class="navbar-brand" href="#">SB Admin v2.0</a>-->
+                <!--<div class="brand titre_accueil">SKEAR<span> . dev</span></div>-->
+                <a class="navbar-brand titre_accueil" href="{{ path('skear_drive_file') }}">SKEAR{#<span> . dev</span>#}</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- dropdown Ecrire -->
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-pencil-square fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Administration"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-write">
+                        <li><a href="{{ path('skear_drive_file') }}"><i class="fa fa-database fa-fw"></i> Liste des fichiers sur le drive</a></li>
+                        <li><a href="{{ path('categorie_index') }}"><i class="fa fa-list fa-fw"></i> Administration des catégories</a></li>
+                    </ul>
+
+                </li>-->
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>-->
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!----------------------- fin Navigtation top --------------------------->
+
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!------------------------ Sidebar Navigation ---------------------------->
+        <!--<div class=" nav-side-menu navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                        </a>
+                    </li>
+
+                    <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                        <a href="#"><i class="fa fa-gift fa-lg"></i> UI Elements <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="products">
+                        <li class="active"><a href="#">CSS3 Animation</a></li>
+                        <li><a href="#">General</a></li>
+                        <li><a href="#">Buttons</a></li>
+                        <li><a href="#">Tabs & Accordions</a></li>
+                        <li><a href="#">Typography</a></li>
+                        <li><a href="#">FontAwesome</a></li>
+                        <li><a href="#">Slider</a></li>
+                        <li><a href="#">Panels</a></li>
+                        <li><a href="#">Widgets</a></li>
+                        <li><a href="#">Bootstrap Model</a></li>
+                    </ul>
+
+
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>New Service 1</li>
+                        <li>New Service 2</li>
+                        <li>New Service 3</li>
+                    </ul>
+
+
+                    <li data-toggle="collapse" data-target="#new" class="collapsed">
+                        <a href="#"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="new">
+                        <li>New New 1</li>
+                        <li>New New 2</li>
+                        <li>New New 3</li>
+                    </ul>
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-lg"></i> Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-lg"></i> Users
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+
+        <!----------------------------- Fin /#sidebar-wrapper --------------------------->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            </br>
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+
+
+            <!-- /#page-content-wrapper -->
+
+        </div>
+    </div>
+        <!-- /#wrapper -->
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+        {% block javascripts %}
+            {% javascripts
+            'bundles/skearapplication/js/hamburger.js' filter='?jsqueeze'
+            'bundles/skearapplication/js/dropzone.js' filter='?jsqueeze'
+            'bundles/skearapplication/js/fileinput.min.js' filter='?jsqueeze'%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+        <script>
+            $(function() {
+                $("#myTable").dataTable();
+                // initialize with defaults
+                $("#input-id").fileinput();
+                // with plugin options
+                $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any'});
+            });
+
+        </script>
+
+    </body>
+</html>

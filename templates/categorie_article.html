@@ -1,0 +1,206 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-user fa-lg"></i> Administration des catégories dans article </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-tree fa-fw marge-adjust"></i> Arbre des catagories
+            </div>
+            <div class="panel-body panel-arbre">
+                <div class="row">
+                    <div class="col-sm-12" style="width: 2364px;">
+                        <div class="tree">
+                        	<!--
+                            <ul>
+                                <li>
+                                    <a href="#">All</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Child</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="#!/articles/developpement">Développement <img src="images/symfony_logo.png"></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Child</a>
+                                            <ul>
+                                                <li><a href="#!/articles/angularjs">angularJS</a></li>
+                                                <li>
+                                                    <a href="#">Grand Child</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Great Grand Child</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Great Grand Child</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Great Grand Child</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Grand Child</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul> -->
+
+                            <ul>
+                            	<li>
+                            		<a ng-href="#!/articles/{{posttree.title}}">{{posttree.title}} <img ng-src="{{posttree.pathcoverimage}}" style="width: 29px;"> </a> 
+                            		
+                            		 	<ul>
+                            		 		<li ng-repeat="posttreeLvlA in posttreeLvl2">
+                            		 			<a ng-href="#!/articles/{{posttreeLvlA.title}}">{{posttreeLvlA.title}} <img ng-src="{{posttreeLvlA.pathcoverimage}}" style="width: 29px;"></a> 
+
+												    <ul ng-if="posttreeLvlA.idEnfant.length > 0">
+												    {{posttreeLvlB = posttreeLvlA.idEnfant;""}}
+
+											    		<li ng-repeat="posttreeLvlC in posttreeLvlB">
+											    			<a ng-href="#!/articles/{{posttreeLvlC.title}}">{{posttreeLvlC.title}} <img ng-src="{{posttreeLvlC.pathcoverimage}}" style="width: 29px;"></a> 
+
+															    <ul ng-if="posttreeLvlC.idEnfant.length > 0">
+															    {{posttreeLvlD = posttreeLvlC.idEnfant;""}}
+
+														    		<li ng-repeat="posttreeLvlE in posttreeLvlD">
+														    			<a ng-href="#!/articles/{{posttreeLvlE.title}}">{{posttreeLvlE.title}} <img ng-src="{{posttreeLvlE.pathcoverimage}}" style="width: 29px;"></a> 
+
+														    			<ul ng-if="posttreeLvlE.idEnfant.length > 0">
+														    			{{posttreeLvlF = posttreeLvlE.idEnfant;""}}
+
+														    				<li  ng-repeat="posttreeLvlG in posttreeLvlF">
+														    					<a ng-href="#!/articles/{{posttreeLvlG.title}}">{{posttreeLvlG.title}} <img ng-src="{{posttreeLvlG.pathcoverimage}}" style="width: 29px;"></a> 
+
+														    					<ul ng-if="posttreeLvlG.idEnfant.length > 0">
+														    					{{posttreeLvlH = posttreeLvlG.idEnfant;""}}
+
+														    						<li ng-repeat="posttreeLvlI in posttreeLvlH">
+														    							<a ng-href="#!/articles/{{posttreeLvlI.title}}">{{posttreeLvlI.title}} <img ng-src="{{posttreeLvlI.pathcoverimage}}" style="width: 29px;"></a> 
+
+														    						</li>
+														    					</ul>
+														    				</li>
+														    			</ul>
+														    		</li>
+														    	</ul>
+													
+												    	</li>
+											    	</ul>
+
+									    	</li>
+                            		 	</ul>
+									
+                            	</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div ng-repeat="posttreeLvlA in posttreeLvl2" >
+    <span>
+        Hello, {{posttreeLvlA.title}}!
+    </span>
+
+    <div ng-if="posttreeLvlA.idEnfant.length > 0">
+	    {{posttreeLvlB = posttreeLvlA.idEnfant;""}}
+
+	    <div ng-repeat="posttreeLvlC in posttreeLvlB">
+		    <span>
+		        Hello2, {{posttreeLvlC.title}}!
+		    </span>
+	    	<div ng-if="posttreeLvlC.idEnfant.length > 0">
+			    {{posttreeLvlD = posttreeLvlC.idEnfant;""}}
+
+    		    <div ng-repeat="posttreeLvlE in posttreeLvlD">
+				    <span>
+				        Hello3, {{posttreeLvlE.title}}!
+				    </span>
+			    </div>
+	    	</div>
+	    </div>
+	</div>
+</div>-->
+
+<div class="row">
+ <!-- panel alert -->
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_alerte">
+            <div class="panel-heading">
+                <i class="fa fa-database fa-fw  marge-adjust"></i> liste des catégories
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <div class="list-group-item" ng-repeat="post in posts">
+                        <img ng-src="{{post.pathcoverimage}}" style="width: 29px;"> {{post.title}}
+                        <span class="pull-right text-muted small"><a href="#" ng-click="showEditPost(post)"><em>Éditer</em></a> - <a href="#" ng-click="deleteModal($index, post)"  data-toggle="modal" data-target="#delete" ><em>Delete</em></a></span>
+                    </div>
+                </div>
+                <!-- /.list-group -->
+            </div>
+            <!-- /.panel-body -->
+            <div class="panel-footer">
+    			<form ng-show="post.id" ng-submit="editPost(post)">
+					<h3>modifier la catégorie {{post.title}}</h3>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="Titre de la nouvelle catégorie" class="form-control" ng-model="post.title"/>
+					</div>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="lien url de l'image représentant le logo de la catégorie " class="form-control" ng-model="post.pathcoverimage"/>
+					</div>
+					<!--<div class="form-group">
+						<label class="control-label">nouvelle image pour la catégorie</label>
+						<input id="input-1" type="file" class="file" ng-model="post.pathimage"/>
+					</div>-->
+					<button type="submit" class="btn btn-primary">Envoyer</button>
+					<div ng-click="newArticle()" class="btn btn-primary">Nouvelle catégorie</div>
+				</form>
+				
+				<form ng-hide="post.id" ng-submit="newPost()">
+					<h3>Ajouter une nouvelle catégorie</h3>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="Titre de la nouvelle catégorie" class="form-control" ng-model="new.title"/>
+					</div>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="lien url de l'image représentant le logo de la catégorie" class="form-control" ng-model="new.pathcoverimage"/>
+					</div>
+					<!--<div class="form-group">
+						<label class="control-label">Image représentant la catégorie</label>
+						<input id="input-1" type="file" class="file" ng-model="new.pathimage"/>
+					</div>-->
+					<button type="submit" class="btn btn-primary">Publier la nouvelle catégorie</button>
+				</form>
+            </div>
+            <!-- /.panel-footer -->
+        </div>
+    </div>
+    <!-- fin panel aleert -->
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="delete" role="dialog">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" id="modaldelete" class="close" data-dismiss="modal">&times;</button>
+	      <h4 class="modal-title">Supprimer la catégorie</h4>
+	    </div>
+	    <div class="modal-body row-center">
+	      <a type="submit" ng-click="deletePost()" class="btn btn-default"><i class="fa fa-check fa-fw"></i> Oui, supprimer l'élément</a>
+	      <a type="submit" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> non, ne pas supprimer</a>
+	    </div>
+	  </div>
+	</div>
+</div>

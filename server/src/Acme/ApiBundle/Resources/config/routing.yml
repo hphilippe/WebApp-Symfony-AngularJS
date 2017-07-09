@@ -1,0 +1,7 @@
+acme_api_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeApiBundle:Default:index }
+
+acme_api_demos:
+    type: rest
+    resource: Acme\ApiBundle\Controller\DemoController

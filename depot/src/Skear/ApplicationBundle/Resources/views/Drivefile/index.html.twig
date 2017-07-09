@@ -1,0 +1,36 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_label(form.file) }}
+    {{ form_widget(form.file, {'id' : 'input-id'}) }}
+
+    {{ form_end(form) }}
+
+
+    <div style="margin-top: 25px;">
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Titre du fichier</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for drivefile in drivefiles %}
+            <tr>
+                <td>
+                    <a target="_blank" class="preview" title="{{ drivefile.title }}" href="{{ asset(drivefile.AssetPath) }}" ><img style="display: none" src="{{ asset(drivefile.AssetPath) }}" alt="gallery thumbnail" />{{ drivefile.title }}</a>
+                    <a download="myimage"  href="{{ asset(drivefile.AssetPath) }}" > (Telecharger)</a>
+                </td>
+                <td>
+                    <a href="{{ path('file_show', { 'id': drivefile.id }) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% endblock %}

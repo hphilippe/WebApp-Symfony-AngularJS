@@ -1,0 +1,63 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-user fa-lg"></i> liste de la communauté de l'anneau de Skear</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4" ng-repeat="user in users">
+
+      <aside class="profile-card">
+
+          <header>
+
+            <!-- here’s the avatar -->
+            <a ng-href="#!/communaute/{{user.username}}/All">
+              <img ng-src="{{user.pathavatarimg}}">
+            </a>
+
+            <!-- the username -->
+            <h1>{{user.firstname}} {{user.name}}</h1>
+
+            <!-- and role or location -->
+            <h2>username : {{user.username}}</h2>
+            <h2 style="margin-top: 25px;">métier : {{user.metier}}</h2>
+
+          </header>
+
+          <!-- bit of a bio; who are you? -->
+          <div class="profile-bio">
+
+            <p>{{user.description}}</p>
+
+          </div>
+
+          <!-- some social links to show off -->
+          <!---<ul class="profile-social-links">
+
+            <li>
+              <a href="#">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/social-twitter.svg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/social-envato.svg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/social-codepen.svg">
+              </a>
+            </li>
+
+          </ul>-->
+
+        </aside>
+        <!-- that’s all folks! -->
+
+    </div>
+
+</div>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <META NAME="ROBOTS" content="noindex">
+
+        <title>Skear Application</title>
+
+        <!-- cdn bootstrap et icone-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- lobipanel css -->
+        <link rel="stylesheet" type="text/css" href="css/application/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="css/application/lobipanel.css">
+
+        <!-- menu et application principaux autour -->
+        <link rel="stylesheet" type="text/css" href="css/application/menu_responsive.css">
+        <link rel="stylesheet" type="text/css" href="css/application/sb-admin-2.css">
+        <link rel="stylesheet" type="text/css" href="css/application/style.css">
+
+        <!-- css plugin datepicker -->
+        <link rel="stylesheet" type="text/css" href="plugin/pickadate/themes/classic.css">
+        <link rel="stylesheet" type="text/css" href="plugin/pickadate/themes/classic.date.css">
+
+        <link rel="icon" type="image/x-icon" href="images/logo skearV233.png"/>
+		
+		<!-- one signal plugin -->
+		<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+		<script>
+			var OneSignal = window.OneSignal || [];
+			OneSignal.push(["init", {
+			  appId: "e7954b36-f0f3-4175-8716-7af725d096b1",
+			  autoRegister: false, /* Set to true to automatically prompt visitors */
+			  httpPermissionRequest: {
+				enable: true
+			  },
+			  notifyButton: {
+				  enable: true, /* Set to false to hide */
+                  position: 'bottom-left' /* Either 'bottom-left' or 'bottom-right' */
+			  }
+			}]);
+		</script>
+    </head>
+    <body ng-app="MonApp">
+
+    <!-- autre -->
+
+        <!-- Navigation top -->
+        <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div ng-controller="NavbarLeftCtrl" class="navbar-header">
+                <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                    <span class="hamb-top"></span>
+                    <span class="hamb-middle"></span>
+                    <span class="hamb-bottom"></span>
+                </button>
+                <!--<a class="navbar-brand" href="#">SB Admin v2.0</a>-->
+                <!--<div class="brand titre_accueil">SKEAR<span> . dev</span></div>-->
+                <a class="navbar-brand titre_accueil nav_decal" href="#!/home">SKEAR</a>
+                <!--<form style="margin-top: 8px;">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <select class="form-control" id="sel1">
+                        <option>Articles</option>
+                        <option>Listes</option>
+                      </select>
+                    </div>
+                    <div class="input-group col-xs-2" style="float: left;">
+                        <input ng-model="data.username" type="text" class="form-control" required="required" placeholder="Recherche" />
+                        <span class="input-group-addon btn btn-default" style="padding: 0;"><a href="#!/recherche/article/blabla" style="padding: 9px;"><i style="color:black;" class="glyphicon glyphicon-search"></i></a></span>
+                    </div>
+                </div>
+                </form>-->
+            </div>
+            <!-- /.navbar-header -->
+
+            <!-- navbar right -->
+            <ul ng-controller="NavbarRightCtrl" class="nav navbar-top-links navbar-right">
+
+                <!--  dropdown chat-->
+                <li class="dropdown">
+                     <a class="chat-active logo_color" href="#">
+                        <i class="fa fa-comments fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="left" title="Chat"></i>
+                    </a>
+                </li>
+
+                 <!-- dropdown Ecrire -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-pencil-square fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Administration"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-write">
+                        <!--<li><a href="#!/new/categorie-article"><i class="fa fa-file-text fa-fw"></i> Administration des catégories dans article</a></li>-->
+                        <li><a href="#!/new/categorie-liste"><i class="fa fa-database fa-fw"></i> Administration des catégories dans listes</a></li>
+                        <li><a href="#!/new/article"><i class="fa fa-pencil-square-o fa-fw"></i> Nouvel article</a></li>
+                        <li><a href="#!/new/donnee"><i class="fa fa-pencil-square fa-fw"></i> Nouvelle donnée liste</a></li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+
+                <!-- dropdown message commentaire -->
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Commentaire article"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>-->
+
+                <!-- /.dropdown task bar progress-->
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                <!--</li>-->
+
+                <!-- /.dropdown alert -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Alertes sorties"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li ng-repeat="listitem in listitems | orderBy:'-realeaseDate' | limitTo:5">
+                            <a href="#!/listes/{{listitem.idCategorymultimedia.title}}">
+                                <div>
+                                    <i class="fa fa-{{listitem.idCategorymultimedia.faIcone}} fa-fw"></i> {{listitem.title}}
+                                    <span class="pull-right text-muted small" style="color: black;" countdown='' date="{{listitem.realeaseDate}}"></span>
+                                </div>
+                            </a>
+                            <li class="divider"></li>
+                        </li>
+                        
+                        <li>
+                            <a class="text-center" href="#!/alerte">
+                                <strong>Voir toutes les alertes</strong>
+                                <i class="fa fa-bell"></i>
+                            </a>
+                            <a class="text-center" href="#!/notification">
+                                <strong>Envoyer une notification</strong>
+                                <i class="fa fa-telegram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle logo_color" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Utilisateur"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <!--<li>
+                            <a href="#!/profil/vue"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li>
+                            <a href="#!/profil/reglage"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>-->
+                        <li ng-click="logout()">
+                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- fin Navigtation top --->
+
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!-- Sidebar Navigation -->
+        <div ng-controller="NavbarSideCtrl" class=" nav-side-menu navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <!-- <div class="nav-side-menu"> -->
+            <!--<div class="brand titre_accueil">SKEAR<span> . dev</span></div>-->
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                        <a href="#!/index" class="retract">
+                            <i class="fa fa-home fa-lg"></i> Accueil
+                        </a>
+                    </li>
+
+                    <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                        <a href="#"><i class="fa fa-file-text fa-lg"></i> Articles <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="products">
+                        <!--<div ng-repeat="CategoriePost in CategoriePosts">
+                            <li ng-if="CategoriePost.idEnfant.length > 0">
+                                <a href="#!/articles/{{CategoriePost.title}}">{{CategoriePost.title}}</a>
+                            </li>
+                        </div>-->
+                        <li><a class="retract" href="#!/articles/All">All</a></li>
+                        <li><a class="retract" href="#!/articles/Développements">Développements</a></li>
+                        <li><a class="retract" href="#!/articles/Langues">Langues</a></li>
+                        <li><a class="retract" href="#!/articles/High-tech">High-tech</a></li>
+                        <li><a class="retract" href="#!/articles/Sports">Sports</a></li>
+                        <li><a class="retract" href="#!/articles/Cuisines">Cuisines</a></li>
+                    </ul>
+
+                    <li data-toggle="collapse" data-target="#new" class="collapsed">
+                        <a href="#"><i class="fa fa-database fa-lg"></i> Listes <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="new">
+                        <li><a class="retract" href="#!/listes/All">All <i class="fa fa-archive fa-fw"></i></a></li>
+                        <li><a class="retract" href="#!/listes/Films">Films <i class="fa fa-film fa-fw"></i></a></li>
+                        <li><a class="retract" href="#!/listes/Jeux-vidéos">Jeux-vidéos <i class="fa fa-gamepad fa-fw"></i></a></li>
+                        <li><a class="retract" href="#!/listes/Séries">Séries <i class="fa fa-desktop fa-fw"></i></a></li>
+                        <li><a class="retract" href="#!/listes/Mangas">Mangas <i class="fa fa-address-book-o fa-fw"></i></a></li>
+                        <li><a class="retract" href="#!/listes/Animations">Animations <i class="fa fa-image fa-fw"></i></a></li>
+                        <!--<div ng-r<epeat="liste in listes">
+                            <li>
+                                <a ng-class="retract" href="#!/listes/{{liste.title}}">{{liste.title}} <i class="fa fa-{{liste.faIcone}} fa-fw"></i></a>
+                            </li>
+                        </div>-->
+                    </ul>
+
+                    <!--<li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a href="#"><i class="fa fa-globe fa-lg"></i> Services Skear (HS) <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>Dépôt ressources</li>
+                        <li>UFO Catcher 3D</li>
+                        <li>Api Skear</li>
+                    </ul>-->
+
+                    <!--<li>
+                        <a href="#">
+                            <i class="fa fa-star fa-lg"></i> Achievements (HS)
+                        </a>
+                    </li>-->
+
+                    <li>
+                        <a class="retract" href="#!/personnelle/All">
+                            <i class="fa fa-user fa-lg"></i> Profile liste
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="retract" href="#!/communaute">
+                            <i class="fa fa-users fa-lg"></i> communauté
+                        </a>
+                    </li>
+
+                    <!--<li>
+                        <a href="#">
+                            <i class="fa fa-desktop fa-lg"></i> Administration frontface
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Fin /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="gear1">
+                <p class="velocity-animating">
+                    <img src="images/circle_bottom01.png" width="450px";>
+                </p>
+                <p class="velocity-animating">
+                    <img src="images/circle_bottom02.png" width="450px";>
+                </p>
+                <p class="velocity-animating">
+                    <img src="images/circle_bottom03.png" width="450px";>
+                </p>
+            </div>
+            <div class="gear2">
+                <p class="velocity-animating">
+                    <img src="images/circle_top01.png" width="484px";>
+                </p>
+                <p class="velocity-animating">
+                    <img src="images/circle_top02.png" width="484px";>
+                </p>
+            </div>
+            </br>
+            
+            <div ng-show="loading">
+                <div class="loading-container">
+                    <div class="loading"></div>
+                    <div id="loading-text">loading</div>
+                    <img src="images/logo_skearV22_v3.png">
+                </div>
+            </div>
+
+            <!--  ng view-->
+            <div class="container" ng-view>
+            
+             
+
+            </div>
+            <!-- fin ng view -->
+
+            <div ng-controller="TchatCtrl" class="row">
+                <div class="col-sm-offset-8 col-lg-4">
+                <!-- /.panel chat -->
+                <div class="lobipanel_chat chat-panel panel panel-default chat-display" id="chat-etat" style="display: none;">
+                    <div class="panel-heading">
+                        <i class="fa fa-comments fa-fw marge-adjust"></i> Tchat
+                        <button class="btn btn-default" ng-click="refreshTchat()"><i id="refreshIcon" class="fa fa-refresh fa-fw"></i></button>
+                        <div class="btn-group pull-right" style="margin-top: 4px;">
+                            <!--<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>-->
+                            <button id="minim_chat_window" type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-minus icon_minim"></span>
+                                <!--<i class="fa fa-minus" aria-hidden="true"></i>-->
+                            </button>
+                            <!--<ul class="dropdown-menu slidedown">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-refresh fa-fw"></i> Refresh
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-check-circle fa-fw"></i> Available
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-times fa-fw"></i> Busy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-clock-o fa-fw"></i> Away
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                                    </a>
+                                </li>
+                            </ul>-->
+                        </div>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul class="chat">
+                            <div ng-repeat="post in posts | orderBy:'id'">
+                                <div ng-if="post.username == cookiename">
+
+                                    <li class="right clearfix">
+                                        <span class="chat-img pull-right">
+                                            <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <small class=" text-muted">
+                                                    <i class="fa fa-clock-o fa-fw"></i> {{post.createdat | date : "d MMMM,  HH:mm:ss" }} <a href="#" ng-click="showEditPost(post)"><em> (Éditer) </em></a> - <a href="#" ng-click="deleteModalTchat($index, post)" data-toggle="modal" data-target="#deleteTchat" ><em> (Delete) </em></a>
+                                                </small>
+                                                <strong class="pull-right primary-font">{{post.username}}</strong>
+                                            </div>
+                                            <p>
+                                                {{post.content}}
+                                            </p>
+                                        </div>
+                                    </li>
+
+                                </div>
+                                <div ng-if="post.username != cookiename">
+                                    
+                                    <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <strong class="primary-font">{{post.username}}</strong>
+                                                <small class="pull-right text-muted">
+                                                    <i class="fa fa-clock-o fa-fw"></i> {{post.createdat | date : "d MMMM,  HH:mm:ss" }} 
+                                                </small>
+                                            </div>
+                                            <p>
+                                                {{post.content}}
+                                            </p>
+                                        </div>
+                                    </li>
+
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                    <div class="panel-footer">
+                        <form ng-show="post.id" ng-submit="editPost(post)">
+                            <div class="input-group">
+                                <input id="btn-input" type="textarea" class="form-control input-sm chat_input" ng-model="post.content" placeholder="Type your message here..." />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-warning btn-sm" id="btn-chat" type="submit">
+                                            Modifier
+                                        </button>
+                                        <button ng-click="newArticle()" class="btn btn-primary btn-sm" style="margin-left:5px;">
+                                            Nouveau message
+                                        </button>
+                                    </span>
+                            </div>
+                        </form>
+                        <form ng-hide="post.id" ng-submit="newPost()">
+                            <div class="input-group">
+                                <input id="btn-input" type="textarea" class="form-control input-sm chat_input" ng-model="new.content" placeholder="Type your message here..." />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-warning btn-sm" id="btn-chat" type="submit">
+                                            Envoyer
+                                        </button>
+                                    </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.panel-footer -->
+                </div>
+                <!-- /.panel .chat-panel -->
+                </div>
+                    <!-- Modal delete-->
+                <div class="modal fade" id="deleteTchat" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Supprimer le commentaire dans le Tchat</h4>
+                        </div>
+                        <div class="modal-body row-center">
+                          <a type="submit" ng-click="deletePost()" class="btn btn-default"><i class="fa fa-check fa-fw"></i> Oui, supprimer l'élément</a>
+                          <a type="submit" id="modaldelete" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> non, ne pas supprimer</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                </div>
+
+
+            <!-- /#page-content-wrapper -->
+
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+        <!-- SCRIPT -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!-- script velocity animation -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.4.3/velocity.min.js"></script>
+
+        <!-- script menu hamburger -->
+        <script src="js/application/hamburger.js"></script>
+        <!-- script rotation gears -->
+        <script src="js/application/rotate.js"></script>
+        <!-- script chat -->
+        <script src="js/application/chat.js"></script>
+
+        <!-- script lobipanel -->
+        <script src="js/application/jquery-ui.min.js"></script>
+        <script src="js/application/lobipanel.js"></script>
+        <script src="js/application/bootstrap.min.js"></script>
+        <script src="js/application/lobipanel_config.js"></script>
+
+        <!-- cdn angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-resource.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-cookies.min.js"></script>
+
+        <!-- bower component -->
+        <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+        <script src="bower_components/push.js/push.min.js"></script>
+        <script src="bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+
+        <!-- Restangular -->
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.1/restangular.min.js"></script>
+
+        <!--plugin -->
+        <!--<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>-->
+        <script src="plugin/ckeditor2/ckeditor.js"></script>
+        <script src="plugin/pickadate/picker.js"></script>
+        <script src="plugin/pickadate/picker.date.js"></script>
+        <script src="plugin/pickadate/translations/fr_FR.js"></script>
+
+        <!-- angularjs -->
+        <script src="js/application/app.js"></script>
+        <!-- angularjs directive -->
+        <script src="js/application/directive/preventhref.js"></script>
+        <script src="js/application/directive/ckeditor.js"></script>
+        <script src="js/application/directive/datepicker.js"></script>
+        <script src="js/application/directive/datecountdown.js"></script>
+        <!-- angularjs filter -->
+        <script src="js/application/filter/trustedhtml.js"></script>
+        <!-- angularjs service -->
+        <script src="js/application/service/restangularInterceptor.js"></script>
+        <script src="js/application/service/editdonne.js"></script>
+        <!-- angularjs controller -->
+        <script src="js/application/controller/main.js"></script>
+        <script src="js/application/controller/articles.js"></script>
+        <script src="js/application/controller/liste.js"></script>
+        <script src="js/application/controller/personnelle.js"></script>
+        <script src="js/application/controller/newpost.js"></script>
+        <script src="js/application/controller/newdonne.js"></script>
+        <script src="js/application/controller/editdonne.js"></script>
+        <script src="js/application/controller/editarticle.js"></script>
+        <script src="js/application/controller/categoriearticle.js"></script>
+        <script src="js/application/controller/categorieliste.js"></script>
+        <script src="js/application/controller/articlesaffiche.js"></script>
+        <script src="js/application/controller/communaute.js"></script>
+        <script src="js/application/controller/communauteuser.js"></script>
+        <script src="js/application/controller/profil.js"></script>
+        <script src="js/application/controller/recherche.js"></script>
+        <script src="js/application/controller/alerte.js"></script>
+
+        <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Crée une catégorie</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-primary" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_index') }}">Retour a la liste des catégorie</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,147 @@
+<div class="row article-entete">
+    <div class="col-sm-7">
+        <p class="titre-page"><i class="fa fa-file-text fa-lg"></i> {{categorieFilter}}  </p>
+    </div>
+    <!--<div class="col-sm-5">
+        <div class="pull-right">
+            <button class="btn btn-default"><i class="fa fa-edit fa-fw"></i> Créer une sous catégorie</button>
+            <button class="btn btn-default"><i class="fa fa-edit fa-fw"></i> Éditer cet catégorie</button>
+        </div>
+    </div>-->
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_categorie">
+            <div class="panel-heading">
+                <i class="fa fa-tree fa-fw marge-adjust"></i> Arbre des catégories
+            </div>
+            <div class="panel-body panel-arbre" id="treediv">
+                <div class="row">
+                    <div class="col-sm-12" style="width: 2364px;">
+                        <div class="tree">
+                            
+                            <ul>
+                                <li>
+                                    <a ng-href="#!/articles/{{posttree.title}}">{{posttree.title}} <img ng-src="{{posttree.pathcoverimage}}" style="width: 29px;"> </a> 
+                                    
+                                        <ul>
+                                            <li ng-repeat="posttreeLvlA in posttreeLvl2">
+                                                <a ng-href="#!/articles/{{posttreeLvlA.title}}">{{posttreeLvlA.title}} <img ng-src="{{posttreeLvlA.pathcoverimage}}" style="width: 29px;"></a> 
+
+                                                    <ul ng-if="posttreeLvlA.idEnfant.length > 0">
+                                                    {{posttreeLvlB = posttreeLvlA.idEnfant;""}}
+
+                                                        <li ng-repeat="posttreeLvlC in posttreeLvlB">
+                                                            <a ng-href="#!/articles/{{posttreeLvlC.title}}">{{posttreeLvlC.title}} <img ng-src="{{posttreeLvlC.pathcoverimage}}" style="width: 29px;"></a> 
+
+                                                                <ul ng-if="posttreeLvlC.idEnfant.length > 0">
+                                                                {{posttreeLvlD = posttreeLvlC.idEnfant;""}}
+
+                                                                    <li ng-repeat="posttreeLvlE in posttreeLvlD">
+                                                                        <a ng-href="#!/articles/{{posttreeLvlE.title}}">{{posttreeLvlE.title}} <img ng-src="{{posttreeLvlE.pathcoverimage}}" style="width: 29px;"></a> 
+
+                                                                        <ul ng-if="posttreeLvlE.idEnfant.length > 0">
+                                                                        {{posttreeLvlF = posttreeLvlE.idEnfant;""}}
+
+                                                                            <li  ng-repeat="posttreeLvlG in posttreeLvlF">
+                                                                                <a ng-href="#!/articles/{{posttreeLvlG.title}}">{{posttreeLvlG.title}} <img ng-src="{{posttreeLvlG.pathcoverimage}}" style="width: 29px;"></a> 
+
+                                                                                <ul ng-if="posttreeLvlG.idEnfant.length > 0">
+                                                                                {{posttreeLvlH = posttreeLvlG.idEnfant;""}}
+
+                                                                                    <li ng-repeat="posttreeLvlI in posttreeLvlH">
+                                                                                        <a ng-href="#!/articles/{{posttreeLvlI.title}}">{{posttreeLvlI.title}} <img ng-src="{{posttreeLvlI.pathcoverimage}}" style="width: 29px;"></a> 
+
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                    
+                                                        </li>
+                                                    </ul>
+
+                                            </li>
+                                        </ul>
+                                    
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- affiche ui card -->
+<div class="row">
+    <div class="col-sm-3" ng-repeat="article in articles">
+        <div class="ui-card">
+            <div class="ui-enrobe-image">
+                 <a href="#!/articles/{{article.categoryTitle}}/{{article.title}}" class="ui-href">
+                    <img class="ui-image" ng-src="{{article.pathcoverimage}}">
+                </a>
+            </div>
+            <div class="ui-categorie">
+                <img style="width: 29px;" ng-src="{{article.categoryUrl}}">
+            </div>
+            <div class="ui-text">
+                <div class="ui-titre">
+                    <a href="#!/articles/{{article.categoryTitle}}/{{article.title}}">{{article.title}}</a>
+                </div>
+                <!--<div class="ui-description">
+                    <span>Matrix est le premier volet de la trilogie Matrix qui se poursuivra avec les films Matrix Reloaded et Matrix Revolutions</span>
+                </div>-->
+                <div class="ui-info">
+                    <span>catégorie : {{article.categoryTitle}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="ui-card">
+            <div class="ui-enrobe-image">
+                 <a href="#!/new/article" class="ui-href">
+                    <img class="ui-image" src="images/panda.gif">
+                </a>
+            </div>
+            <div class="ui-categorie">
+                <i class="fa fa-fw fa-plus"></i>
+            </div>
+            <div class="ui-text">
+                <div class="ui-titre">
+                    <a href="#!/new/article">Nouvel article</a>
+                </div>
+                <!--<div class="ui-description">
+                    <span>Matrix est le premier volet de la trilogie Matrix qui se poursuivra avec les films Matrix Reloaded et Matrix Revolutions</span>
+                </div>-->
+                <div class="ui-info">
+                    <span>créer un nouvel article</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('.lobipanel_categorie').lobiPanel({
+        reload: false,
+        editTitle: false,
+        state: "collapsed"
+    });
+});
+
+$(document).ready(function() {
+    $('#treediv').mousewheel(function(e, delta) {
+        this.scrollLeft -= (delta * 40);
+        e.preventDefault();
+    });
+});
+</script>

@@ -1,0 +1,43 @@
+sylius_resource:
+    settings:
+            default_page_size: 100
+            allowed_paginate:  [5, 10, 25, 50]
+            sortable:          true
+            filterable:        true
+    resources:
+            app.attachmentimg:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Attachmentimg
+            app.categorymultimedia:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Categorymultimedia
+            app.categorypost:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Categorypost
+            app.comment:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Comment
+            app.listitem:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Listitem
+            app.post:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Post
+            app.tchat:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Tchat
+            app.useritem:
+                driver:    doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Useritem
+            app.user:
+                driver:    doctrine/orm
+                classes:
+                    model: Acme\ApiBundle\Entity\User

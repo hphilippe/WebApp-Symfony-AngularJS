@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <!--<h1 class="main-title">Connect <span class="thin">Three</span></h1>-->
+            <div class="main-title">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="row-height">
+                            <div class="col-xs-4 col-height">
+                                <img class="resize_image" src="{{ asset('bundles/skearuser/images/logo_skearV2334.png') }}" alt="Example" />
+                                <div>
+                                <div class="glitch titre_accueil" data-text="SKEAR"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-8 col-height col-middle">
+                                {#<div>
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                        <a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                    {% endif %}
+                                </div>
+
+                                {% if app.request.hasPreviousSession %}
+                                    {% for type, messages in app.session.flashbag.all() %}
+                                        {% for message in messages %}
+                                            <div class="flash-{{ type }}">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endif %}#}
+
+                                {% block fos_user_content %}
+                                {% endblock fos_user_content %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    <script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/EasePack.min.js'></script>
+    <script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/rAF.js'></script>
+    <script src='http://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/js/TweenLite.min.js'></script>
+{% endblock %}

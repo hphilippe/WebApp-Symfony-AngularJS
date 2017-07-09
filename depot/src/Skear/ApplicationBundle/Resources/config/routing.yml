@@ -1,0 +1,21 @@
+skear_application_categorie:
+    resource: "@SkearApplicationBundle/Resources/config/routing/drivecategorie.yml"
+    prefix:   /categorie
+
+skear_drive_file:
+    path:     /
+    defaults: { _controller: SkearApplicationBundle:DriveFile:index }
+
+file_show:
+    path:     /{id}/show
+    defaults: { _controller: "SkearApplicationBundle:DriveFile:show" }
+    methods:  GET
+
+file_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "SkearApplicationBundle:DriveFile:delete" }
+    methods:  DELETE
+
+ajax_snippet_image_send:
+    path:   /ajax/snippet/image/send
+    defaults: { _controller: SkearApplicationBundle:DriveFile:ajaxSnippetImageSend }

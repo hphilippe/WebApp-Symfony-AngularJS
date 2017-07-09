@@ -1,0 +1,78 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-database fa-lg"></i> Administration des catégories dans liste </p>
+    </div>
+</div>
+
+
+<div class="row">
+ <!-- panel alert -->
+    <div class="col-sm-12">
+        <div class="panel panel-default lobipanel_alerte">
+            <div class="panel-heading">
+                <i class="fa fa-database fa-fw  marge-adjust"></i> liste des catégories
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <div class="list-group-item" ng-repeat="post in posts">
+                        <i class="fa fa-{{post.faIcone}} fa-fw"></i> {{post.title}}
+                        <span class="pull-right text-muted small"><a href="#" ng-click="showEditPost(post)"><em>Éditer</em></a> - <a href="#" ng-click="deleteModal($index, post)"  data-toggle="modal" data-target="#delete" ><em>Delete</em></a></span>
+                    </div>
+                </div>
+                <!-- /.list-group -->
+            </div>
+            <!-- /.panel-body -->
+            <div class="panel-footer">
+    			<form ng-show="post.id" ng-submit="editPost(post)">
+					<h3>modifier la catégorie {{post.title}}</h3>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="Titre de la nouvelle catégorie" class="form-control" ng-model="post.title"/>
+					</div>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="code fa-icone sur font awesome sous la forme 'gamepad', 'film', etc " class="form-control" ng-model="post.faIcone"/>
+					</div>
+					<!--<div class="form-group">
+						<label class="control-label">nouvelle image pour la catégorie</label>
+						<input id="input-1" type="file" class="file" ng-model="post.pathimage"/>
+					</div>-->
+					<button type="submit" class="btn btn-primary">Envoyer</button>
+					<div ng-click="newArticle()" class="btn btn-primary">Nouvelle catégorie</div>
+				</form>
+				
+				<form ng-hide="post.id" ng-submit="newPost()">
+					<h3>Ajouter une nouvelle catégorie</h3>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="Titre de la nouvelle catégorie" class="form-control" ng-model="new.title"/>
+					</div>
+					<div class="form-group">
+						<input type="text" required="required" placeholder="code fa-icone sur font awesome (http://fontawesome.io/) à rentrer sous la forme 'gamepad', 'film', etc " class="form-control" ng-model="new.faIcone"/>
+					</div>
+					<!--<div class="form-group">
+						<label class="control-label">Image représentant la catégorie</label>
+						<input id="input-1" type="file" class="file" ng-model="new.pathimage"/>
+					</div>-->
+					<button type="submit" class="btn btn-primary">Publier la nouvelle catégorie</button>
+				</form>
+            </div>
+            <!-- /.panel-footer -->
+        </div>
+    </div>
+    <!-- fin panel aleert -->
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="delete" role="dialog">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" id="modaldelete" class="close" data-dismiss="modal">&times;</button>
+	      <h4 class="modal-title">Supprimer la catégorie</h4>
+	    </div>
+	    <div class="modal-body row-center">
+	      <a type="submit" ng-click="deletePost()" class="btn btn-default"><i class="fa fa-check fa-fw"></i> Oui, supprimer l'élément</a>
+	      <a type="submit" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close fa-fw"></i> non, ne pas supprimer</a>
+	    </div>
+	  </div>
+	</div>
+</div>

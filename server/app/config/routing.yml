@@ -1,0 +1,58 @@
+#acme_api:
+#    resource: "@AcmeApiBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+app_attachmentimg:
+    resource: app.attachmentimg
+    type:     sylius.api
+    prefix:   /api
+
+app_categorymultimedia:
+    resource: app.categorymultimedia
+    type:     sylius.api
+    prefix:   /api
+
+app_categorypost:
+    resource: app.categorypost
+    type:     sylius.api
+    prefix:   /api
+
+app_comment:
+    resource: app.comment
+    type:     sylius.api
+    prefix:   /api
+
+app_listitem:
+    resource: app.listitem
+    type:     sylius.api
+    prefix:   /api
+
+app_post:
+    resource: app.post
+    type:     sylius.api
+    prefix:   /api
+
+app_tchat:
+    resource: app.tchat
+    type:     sylius.api
+    prefix:   /api
+    defaults:
+         _sylius:
+            paginate: false
+            limit: 50
+            sortable: true
+            sorting:
+                id: desc
+
+app_useritem:
+    resource: app.useritem
+    type:     sylius.api
+    prefix:   /api
+
+app_user:
+    resource: app.user
+    type:     sylius.api
+    prefix:   /api
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

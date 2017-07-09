@@ -1,0 +1,39 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>liste des catégories</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Logo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for driveCategorie in driveCategories %}
+            <tr>
+                <td>{{ driveCategorie.title }}</td>
+                <td><img style="width: 100px;" src="{{ asset(driveCategorie.AssetPath) }}" alt="{{ driveCategorie.title }}" /></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorie_show', { 'id': driveCategorie.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorie_edit', { 'id': driveCategorie.id }) }}">Éditer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_new') }}">Crée une nouvelle catégorie</a>
+        </li>
+    </ul>
+{% endblock %}

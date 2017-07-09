@@ -1,0 +1,65 @@
+<div class="row article-entete">
+    <div class="col-sm-12">
+        <p class="titre-page"><i class="fa fa-database fa-lg"></i>Mise à jour de " {{donnee.title}} " </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+    	<form ng-submit="editPost()">
+    		<div class="form-group">
+    			<label>Choix de la catégorie</label>
+            	<select required class="form-control" ng-init="donnee.idCategorymultimedia.id" ng-model="donnee.idCategorymultimedia.id">
+                    <option ng-repeat="categorie in categories" value="{{categorie.id}}">{{categorie.title}}</option>
+              	</select>
+    		</div>
+    		<div class="form-group">
+		        <label>Titre</label>
+		        <input type="text" class="form-control" required="required" placeholder="Titre" ng-model="donnee.title"/>
+    		</div>
+            <div class="form-group">
+                <label>Sous titre</label>
+                <input type="text" class="form-control" placeholder="Sous titre" ng-model="donnee.subtitle"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">lien url du trailer</label>
+                <input type="text" class="form-control" placeholder="lien url du trailer" ng-model="donnee.trailerurl"/>
+            </div>
+            <div class="form-group">
+                <label>Date de sortie</label>
+                <input class="form-control datepicker" required datepicker-options="{today: 'Aujourdhui', selectYears: 140, selectMonths: true, format: 'yyyy/mm/dd'}" type="text" placeholder="Date de sortie" ng-model="donnee.realeaseDate"/>
+            </div>
+    		<div class="form-group">
+		        <label>Description</label>
+		        <textarea data-ck-editor required class="form-control" ng-model="donnee.description"></textarea>
+    		</div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Image de fond (555 x 211)</label>
+                        <input type="text" class="form-control" required="required" placeholder="lien url image du fond" ng-model="donnee.pathcoverimage"/>
+                    </div>
+                    <div>
+                        <img ng-src="{{donnee.pathcoverimage}}" width="555">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label">Image poster (187 x 282)</label>
+                        <input type="text" class="form-control" required="required" placeholder="lien url du poster" ng-model="donnee.pathposter"/>
+                    </div>
+                    <div>
+                        <img ng-src="{{donnee.pathposter}}" width="187" height="282">
+                    </div>
+                </div>
+            </div>
+
+
+		    <br>
+
+		    <button type="submit" class="btn btn-default">Mettre à jour</button>
+		    <a href="#!/index" class="btn btn-default pull-right">Retour à la page d'accueil</a>
+    	</form>
+    </div>
+</div>
+
